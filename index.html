@@ -1,47 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Esercizio Inegneria del software</title>
-  <script src="main.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;900&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/9e0a73269f.js" crossorigin="anonymous"></script>
-</head>
-<body>
-  <div id="container">
-
-    <div id="ciccio">
-      <div id="input-container">
-        <div id="text-input">Inserisci il file CSV</div>
-        <div id="file-container">
-          <label for="fileInput" id="labelInput"> 
-            <i class="fa-solid fa-file-arrow-up"></i>
-              Carica
-            <input id="fileInput" type="file" accept=".csv" />
-            <pre id="output"></pre>
-          </label>
-        </div>
+  <head>
+    <title>Esercizio Inegneria del software</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9e0a73269f.js" crossorigin="anonymous"></script>
+  </head>
+  <body id="container">
+    <div id="input-container">
+      <div id="text-input">Inserisci il file CSV</div>
+      <div id="file-container">
+        <label for="fileInput" id="labelInput"> 
+          <i class="fa-solid fa-file-arrow-up"></i>
+            Carica
+          <input id="fileInput" type="file" accept=".csv" />
+          <pre id="output"></pre>
+        </label>
       </div>
     </div>
-
+    
     <script>
       // Gestisci il caricamento del file
       document.getElementById('fileInput').addEventListener('change', function(event) {
         const file = event.target.files[0];
         const outputElement = document.getElementById('output');
         
-        // Utilizza la funzione dal file JavaScript separato
+        
         readCSVFile(file, outputElement);
       });
 
-      
     </script>
+      
+    <div id="table-container"> </div>
+    <div id="result-container"> </div>
     
-      <div id="table-container"> </div>
-      <div id="text-container"> </div>
-  </div>
-  
-</body>
+  </body>
 </html>
