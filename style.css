@@ -1,11 +1,6 @@
 body{
     background: rgb(63,94,251);
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgb(226, 122, 143) 100%);
-    
-}
-
-#container {
-    
     display: flex;
     flex-direction: center;
     justify-content: center;
@@ -13,71 +8,62 @@ body{
     height: 98vh;
 }
 
-@media (max-width: 1000px) {
-    /* Stili per schermi più piccoli */
-    .container {
-        width: auto; /* Disabilita il layout flessibile */
-        background-color: lightcoral; /* Cambia il colore dello sfondo */
-    }
-}
-
-#ciccio {
-    border: 3px solid yellow;
-}
-
 
 #input-container {
-    
-    margin-bottom: 20px;
-    border: 5px dashed rgb(29,29,78);
+    margin: 20px auto; 
+    border: 0.5vh dashed rgb(29, 29, 78);
     border-radius: 25px;
     height: 30vh;
     width: 50vh;
-    color: rgb(29,29,78);
+    color: rgb(29, 29, 78);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto; 
 }
 
-#input-container:hover{
+#input-container:hover {
     background-color: rgba(29, 29, 78, 0.33);
+    
 }
 
-#text-input{
+#text-input {
+    margin-top: 2vh;
     font-family: 'Gabarito', sans-serif;
     color: white;
-    font-size: 30pt;
+    font-size: 5vh; 
+    
 }
 
 #file-container {
-    margin: 5px;
-    margin-top: 20px;
+    margin: 2vh auto; 
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     font-family: 'Gabarito', sans-serif;
     border-radius: 25px;
-    width: 15vh;
+    width: 15vh; 
     height: 5vh;
     color: white;
     background-color: rgb(36, 36, 135);
+    box-shadow: 2px 2px 4px rgba(1, 9, 14, 0.5);
 }
 
 label {
-    font-size: 20px;
-    display: flex; 
-    align-items: center; 
+    font-size: 2vh;
+    display: flex;
+    align-items: center;
 }
+
 
 #file-container:hover{
     background-color: #cc749c;
     
+    
 }
 
 label i {
-    margin-right: 10px; /* Aggiunge spazio tra l'icona e il testo */
+    margin-right: 10px; 
 }
 
 input[type="file"] {
@@ -85,7 +71,7 @@ input[type="file"] {
 } 
 
 #table-container {
-    margin-top: 200px;
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,15 +81,15 @@ input[type="file"] {
 table {
    
     border: none;
-    font-size: 30pt;
+    font-size: 4vh;
     font-family: 'Gabarito', sans-serif;
     
 }
 
  th {
     
-    height: 60px;
-    width: 60px;
+    height: 6vh;
+    width: 6vh;
     text-align: center;
     font-weight: 100;
     border-radius: 10px;
@@ -114,8 +100,8 @@ table {
 }
 
 td {
-    height: 60px;
-    width: 60px;
+    height: 6vh;
+    width: 6vh;
     text-align: center;
     font-weight: 100;
     border-radius: 10px;
@@ -140,14 +126,14 @@ tr td:first-child {
     text-shadow: 1px 1px 2px rgb(164,180,236);
 }
 
-#text-container{
+#result-container{
     
-    margin-top: 20px;
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 10vh; 
-    font-size: 30pt;
+    font-size: 3vw;
     font-family: 'Gabarito', sans-serif;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -155,10 +141,10 @@ tr td:first-child {
 
 .circle-sketch-highlight{
     position: relative;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 1vh;
+    margin-left: 1vh;
     font-weight: 600;
-    font-size: 30pt;
+    font-size: em;
     
   }
 
@@ -197,6 +183,12 @@ tr td:first-child {
     transform:rotate(-1deg);
     opacity:0.7;
     border-radius:50%;
+  }
+
+  @media (max-height: 7000px) {
+    .result-container {
+      display: block; 
+    }
   }
 
 
