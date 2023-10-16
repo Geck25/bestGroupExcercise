@@ -30,29 +30,26 @@ function readCSVFile(inputFile) {
             matrix.push(values);
         }
 
+
         const container = document.getElementById("container");
         container.style.flexDirection = "column";
-        
-
-        const ciccio = document.getElementById("ciccio");
-        ciccio.style.position = 'fixed';
-        ciccio.style.top = '10px';
         
 
         const inputContainer = document.getElementById("input-container");
         inputContainer.style.height = '10vh';
         inputContainer.style.width = '20vh';
-        inputContainer.style.border = '2px dashed rgb(29,29,78);';
+        
+        inputContainer.style.border = '0.5vh dashed rgb(29,29,78);';
 
         const textInput = document.getElementById("text-input");
-        textInput.style.fontSize = '20px';
+        textInput.style.fontSize = '2vh';
 
         const fileContainer = document.getElementById("file-container");
-        fileContainer.style.width = "80px";
-        fileContainer.style.height = "40px";
+        fileContainer.style.width = "10vh";
+        fileContainer.style.height = "5vh";
 
         const label = document.getElementById("labelInput");
-        label.style.fontSize = "15px";
+        label.style.fontSize = "1.5vh";
 
         // CREO LA TABELLA
         //console.log(matrix);
@@ -86,11 +83,9 @@ function readCSVFile(inputFile) {
                 media: (
                         (averageMatrix(combinationMatrix) / combos[i].length) + 
                         (averageMatrix(diffMatrix) / (headers.length - combos[i].length))
-                        ) 
-                        / 2 
-                };
+                        ) / 2 };
 
-                console.log(tempGroup);
+                //console.log(tempGroup);
             
                 groups.push(tempGroup);
             }
@@ -172,7 +167,9 @@ function combinations(arr, k) {
     
     return result;
 }
-  
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+// CALCOLO LA SOTTOMATRICE DEL GRUPPO PRESO IN CONSIDERAZIONE
   
 function findRowAndheaders(matrix, comb, headers) {
     const submatrix = [];
@@ -182,21 +179,23 @@ function findRowAndheaders(matrix, comb, headers) {
         const newRow = [];
 
         if (rowIndex >= 0 && rowIndex < matrix.length) {
-        for (let j = 0; j < comb.length; j++) {
-            const columnIndex = headers.indexOf(comb[j]);
+            for (let j = 0; j < comb.length; j++) {
+                const columnIndex = headers.indexOf(comb[j]);
 
-            if (columnIndex >= 0 && columnIndex < matrix[rowIndex].length) {
-            newRow.push(matrix[rowIndex][columnIndex]);
+                if (columnIndex >= 0 && columnIndex < matrix[rowIndex].length) {
+                    newRow.push(matrix[rowIndex][columnIndex]);
+                }
             }
-        }
-        submatrix.push(newRow);
+                submatrix.push(newRow);
         }
     }
 
     //console.log(submatrix)
-
     return submatrix;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+// CALCOLO DELLA SOMMA DELLA MATRICE
   
 function averageMatrix(mtx){
     let sum = 0;
@@ -213,7 +212,6 @@ function averageMatrix(mtx){
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-
 //FUNZIONE PER COLORARE LE COLONNE DEI GRUPPI MIGLIORI
 
 function colorColumns(groups, headers){
@@ -283,9 +281,10 @@ function findMaxGroup(groups){
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNZIONE CHE MI SCRIVE I GRUPPI MIGLIORI CON LA LORO MEDIA
 
 function writeGroups(groups) {
-    var text = document.getElementById('text-container');
+    var text = document.getElementById('result-container');
     
     var gruppo1String = groups.gruppo1.join(', '); 
     var gruppo2String = groups.gruppo2.join(', ');
