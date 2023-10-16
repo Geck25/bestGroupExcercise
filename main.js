@@ -3,8 +3,9 @@ function readCSVFile(inputFile) {
     var matrix = [];
     var headers = [];
 
+
     reader.onload = function(e) {
-    
+        
         const contents = e.target.result;
         const lines = contents.trim().split('\n');
         
@@ -33,6 +34,7 @@ function readCSVFile(inputFile) {
 
         const container = document.getElementById("container");
         container.style.flexDirection = "column";
+        container.style.marginTop = "0px";
         
 
         const inputContainer = document.getElementById("input-container");
@@ -96,7 +98,8 @@ function readCSVFile(inputFile) {
 
             //COLORE LE COLONNE DEI GRUPPPI
             colorColumns(groups, headers);
-        
+            writeFileName(inputFile.name);
+            
     };
 
     reader.readAsText(inputFile);
@@ -284,7 +287,7 @@ function findMaxGroup(groups){
 // FUNZIONE CHE MI SCRIVE I GRUPPI MIGLIORI CON LA LORO MEDIA
 
 function writeGroups(groups) {
-    var text = document.getElementById('result-container');
+    const text = document.getElementById('result-container');
     
     var gruppo1String = groups.gruppo1.join(', '); 
     var gruppo2String = groups.gruppo2.join(', ');
@@ -295,6 +298,14 @@ function writeGroups(groups) {
     
     text.innerHTML = "I team sono &nbsp;" + gruppo1String + "&nbsp; e &nbsp;" +
     gruppo2String + " &nbspcon una media pari &nbsp;" + media;
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNZIONE CHE SCRIVE IL NOME DEL FILE CHE STO VISUALIZZANDO
+function writeFileName(name){
+    const text = document.getElementById('name-file');
+    text.innerHTML = name;
+
 }
 
 
