@@ -8,42 +8,54 @@ function readCSVFile(inputFile) {
         
         const contents = e.target.result;
         const lines = contents.trim().split('\n');
-        
-        if (lines.length === 0) {
-            console.error('Il file CSV è vuoto.');
-            return;
-        }
-        
-        // Rimuovi le virgolette doppie (") dagli header
-        headers = lines[0].split(';').slice(0, -1).map(header => header.replace(/["']/g, '').trim());
 
-        // ottenere i valori numerici
-        for (var i = 1; i < lines.length; i++) {
-            var values = lines[i].split(';').slice(0, -1).map(value => {
-                // Sostituisci "/" con spazi vuoti
-                return value.replace(/\//g, ' ').trim() === '' ? 0 : Number(value);
-            });
-
-            // Rimuovi il primo elemento dall'array dei valori
-            values.shift();
-
-            // Aggiungi i valori all'array della matrice
-            matrix.push(values);
-        }
-
+        const csvFile = readFile(lines);
+        headers = csvFile[0];
+        matrix = csvFile[1];
+    
 
         flexPage();
-    
         createTable(headers, matrix);
 
         var combos = getCombos(headers);
+        
         var groups = getGroups(headers, matrix, combos);
+        console.log(groups);
 
         colorColumns(groups, headers);
         writeFileName(inputFile.name);    
     };
 
     reader.readAsText(inputFile);
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+function readFile(lines){
+    var temp = [];
+    var tempMatrix = [];
+    
+    if (lines.length === 0) {
+        console.error('Il file CSV è vuoto.');
+        return;
+    }
+    
+    temp[0] = lines[0].split(';').slice(0, -1).map(header => header.replace(/["']/g, '').trim());
+    
+    for (var i = 1; i < lines.length; i++) {
+        var values = lines[i].split(';').slice(0, -1).map(value => {
+            
+            return value.replace(/\//g, ' ').trim() === '' ? 0 : Number(value);
+        });
+
+        values.shift();
+
+        tempMatrix.push(values);
+    }
+
+    temp[1] = tempMatrix;
+
+    return temp;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -112,6 +124,8 @@ function combinations(arr, k) {
     return result;
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
 function getCombos(headers){
     if(headers.length % 2 == 0){
 
@@ -123,9 +137,10 @@ function getCombos(headers){
         const temp2 = (combinations(headers, Math.ceil(headers.length / 2)));
         return combos = [...temp1, ...temp2];
         
-        //console.log(combos);
     }
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
 
 function getGroups(headers, matrix, combos){
     const groups = [];
