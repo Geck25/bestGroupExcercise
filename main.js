@@ -32,74 +32,15 @@ function readCSVFile(inputFile) {
         }
 
 
-        const container = document.getElementById("container");
-        container.style.flexDirection = "column";
-        container.style.marginTop = "0px";
-        
-
-        const inputContainer = document.getElementById("input-container");
-        inputContainer.style.height = '10vh';
-        inputContainer.style.width = '20vh';
-        
-        inputContainer.style.border = '0.5vh dashed rgb(29,29,78);';
-
-        const textInput = document.getElementById("text-input");
-        textInput.style.fontSize = '2vh';
-
-        const fileContainer = document.getElementById("file-container");
-        fileContainer.style.width = "10vh";
-        fileContainer.style.height = "5vh";
-
-        const label = document.getElementById("labelInput");
-        label.style.fontSize = "1.5vh";
-
-        // CREO LA TABELLA
-        //console.log(matrix);
-        //console.log(headers);
+        flexPage();
+    
         createTable(headers, matrix);
 
-        //CALCOLO DELLE COMBINAZIONI
-        var groups = [];
-        var combos = [];
-        if(headers.length % 2 == 0){
+        var combos = getCombos(headers);
+        var groups = getGroups(headers, matrix, combos);
 
-            combos = combinations(headers, headers.length / 2);
-
-        } else {
-
-            const temp1 = combinations(headers, Math.floor(headers.length / 2));
-            const temp2 = (combinations(headers, Math.ceil(headers.length / 2)));
-            combos = [...temp1, ...temp2];
-            
-            //console.log(combos);
-        }
-            
-            for(var i = 0; i < combos.length; i++) {
-
-                var combinationMatrix = findRowAndheaders(matrix, combos[i], headers);
-                var diffMatrix = findRowAndheaders(matrix, headers.filter(item => !combos[i].includes(item)), headers);
-            
-                var tempGroup = {
-                gruppo1: combos[i],
-                gruppo2: headers.filter(item => !combos[i].includes(item)),
-                media: (
-                        (averageMatrix(combinationMatrix) / combos[i].length) + 
-                        (averageMatrix(diffMatrix) / (headers.length - combos[i].length))
-                        ) / 2 };
-
-                //console.log(tempGroup);
-            
-                groups.push(tempGroup);
-            }
-            
-                //console.log(groups);
-
-            //
-
-            //COLORE LE COLONNE DEI GRUPPPI
-            colorColumns(groups, headers);
-            writeFileName(inputFile.name);
-            
+        colorColumns(groups, headers);
+        writeFileName(inputFile.name);    
     };
 
     reader.readAsText(inputFile);
@@ -169,6 +110,44 @@ function combinations(arr, k) {
     generateCombination(0, []);
     
     return result;
+}
+
+function getCombos(headers){
+    if(headers.length % 2 == 0){
+
+        return combos = combinations(headers, headers.length / 2);
+
+    } else {
+
+        const temp1 = combinations(headers, Math.floor(headers.length / 2));
+        const temp2 = (combinations(headers, Math.ceil(headers.length / 2)));
+        return combos = [...temp1, ...temp2];
+        
+        //console.log(combos);
+    }
+}
+
+function getGroups(headers, matrix, combos){
+    const groups = [];
+    for(var i = 0; i < combos.length; i++) {
+
+        var combinationMatrix = findRowAndheaders(matrix, combos[i], headers);
+        var diffMatrix = findRowAndheaders(matrix, headers.filter(item => !combos[i].includes(item)), headers);
+    
+        var tempGroup = {
+        gruppo1: combos[i],
+        gruppo2: headers.filter(item => !combos[i].includes(item)),
+        media: (
+                (averageMatrix(combinationMatrix) / combos[i].length) + 
+                (averageMatrix(diffMatrix) / (headers.length - combos[i].length))
+                ) / 2 };
+
+        //console.log(tempGroup);
+    
+        groups.push(tempGroup);
+    }
+
+    return groups;
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -305,8 +284,33 @@ function writeGroups(groups) {
 function writeFileName(name){
     const text = document.getElementById('name-file');
     text.innerHTML = name;
-
 }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+function flexPage(){
+    const container = document.getElementById("container");
+    container.style.flexDirection = "column";
+    container.style.marginTop = "0px";
+    
+
+    const inputContainer = document.getElementById("input-container");
+    inputContainer.style.height = '10vh';
+    inputContainer.style.width = '20vh';
+    
+    inputContainer.style.border = '0.5vh dashed rgb(29,29,78);';
+
+    const textInput = document.getElementById("text-input");
+    textInput.style.fontSize = '2vh';
+
+    const fileContainer = document.getElementById("file-container");
+    fileContainer.style.width = "10vh";
+    fileContainer.style.height = "5vh";
+
+    const label = document.getElementById("labelInput");
+    label.style.fontSize = "1.5vh";
+}
+
+
 
 
 
